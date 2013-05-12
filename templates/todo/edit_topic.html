@@ -1,0 +1,38 @@
+$def with(topic,items)
+$:render.header()
+        <div class="box">
+
+            <div class="box todos">
+            <h2>$topic.title</h2>
+                <!--<h2 class="box">待办事项</h2>-->
+                <ul>
+                    $for item in items:
+                        $ status = ''
+                        <li $:status>
+                         	$item.creator : 
+                         	$item.content ,
+                         	$item.post_date 
+                            &nbsp;
+                            <a href="/todo/item/$item.id/edit">修改</a>,
+                            <a href="/todo/item/$item.id/delete" onclick="return confirm('删除以后不能恢复的，确定？')">删除</a>
+                        </li>
+                </ul>
+            </div>
+
+            <div class="box post">
+                <h2>新增</h2>
+                <form action="/todo/item/new" method="post" id="post_new" onsubmit = "return check_empty()">
+                    <p>内容</p>
+                    <p><input type="text" name="content" class="long_txt" /></p>
+                    <p>创建者</p>
+                    <p><input type="text" name="creator" class="short_txt " /></p>
+                    <p><input type="submit" class="submit" value="添加" /></p>
+                    <input type="hidden" name="topic_id" value="$topic.id">
+                </form>
+            </div>
+
+        </div>
+
+
+
+$:render.foot()
