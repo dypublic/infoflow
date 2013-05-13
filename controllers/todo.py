@@ -9,6 +9,7 @@ db = settings.db
 tb = 'todo'
 tb_topic = 'topics'
 tb_items = 'items'
+page_items = 20
 def get_by_id(id):
     s = db.select(tb, where='id=$id', vars=locals())
     if not s:
@@ -148,11 +149,20 @@ class Delete:
         db.delete(tb, where='id=$id', vars=locals())
         return render.error('删除成功！', '/')
 
+class Page:
 
+    def GET(self,page_index):
+        count = db.select(tb_topic, what = 'count(id)')
+        topics = db.select(tb_topic, order='post_date desc', limit = page_items, offset = (page_index-1)*page_items)
+#        for topic in topics:
+#            print topic.post_date
+        return render.index(topics,page_index,count)
 class Index:
 
     def GET(self):
-        topics = db.select(tb_topic, order='post_date desc')
+        result = db.select(tb_topic, what = 'count(id)')
+        count = result[0]['count(id)']
+        topics = db.select(tb_topic, order='post_date desc', limit = page_items)
 #        for topic in topics:
 #            print topic.post_date
-        return render.index(topics)
+        return render.index(topics,1,count)

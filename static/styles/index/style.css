@@ -45,7 +45,14 @@ a:hover { color:#FF3300; }
                 .post .submit { line-height:normal; -padding:0; }
 
 
-
+    .pager { margin: 20px; padding: 4px; border: 1px solid #999;}
+    .pager { color: #333; text-align: center; margin: 8px;}
+    .pager span{ color: #999; margin: 0 1px; padding: 3px 6px; border: 1px solid #ccc;}
+    .pager span.on{ color: #333; font-weight: bold; border: 1px solid #333;}
+    .pager a{ color: #00f; text-decoration: none;}
+    .pager a span{ border: 1px solid #66c; color: #33f;}
+    .pager a:hover span{ color: #f00; background: #ff9;}
+    
     .foot { border-top:1px solid #CCC; color:#666; padding-top:10px; font-size:11px; }
         .foot img { vertical-align:top; }
 
